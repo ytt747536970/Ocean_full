@@ -781,6 +781,7 @@ void createFresnelMap(ID3D11Device* pd3dDevice)
 		buffer[i] = (sky_blend << 8) | fresnel;
 	}
 
+
 	D3D11_TEXTURE1D_DESC tex_desc;
 	tex_desc.Width = FRESNEL_TEX_SIZE;
 	tex_desc.MipLevels = 1;

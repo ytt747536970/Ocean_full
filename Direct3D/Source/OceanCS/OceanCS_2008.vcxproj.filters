@@ -19,9 +19,6 @@
     <None Include="..\Common\DXUT\Optional\directx.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="CSFFT\fft_512x512_c2c.hlsl">
-      <Filter>CSFFT</Filter>
-    </None>
     <None Include="ocean_simulator_cs.hlsl" />
     <None Include="ocean_simulator_vs_ps.hlsl" />
     <None Include="skybox11.hlsl" />
@@ -29,6 +26,7 @@
     <None Include="currstepmap.hlsl" />
     <None Include="Firey.fx" />
     <None Include="rain.fx" />
+    <None Include="fft_512x512_c2c.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OceanCS.rc">
@@ -51,9 +49,6 @@
     <ClInclude Include="..\..\Include\DXUT\Core\DXUTmisc.h">
       <Filter>DXUTCore</Filter>
     </ClInclude>
-    <ClInclude Include="CSFFT\fft_512x512.h">
-      <Filter>CSFFT</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Include\DXUT\Optional\DXUTcamera.h">
       <Filter>DXUTOptional</Filter>
     </ClInclude>
@@ -74,6 +69,7 @@
     <ClInclude Include="d3dUtil.h" />
     <ClInclude Include="d3dx11effect.h" />
     <ClInclude Include="rain.h" />
+    <ClInclude Include="fft_512x512.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\DXUT\Core\DXUT.cpp">
@@ -87,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="..\Common\DXUT\Core\DXUTmisc.cpp">
       <Filter>DXUTCore</Filter>
-    </ClCompile>
-    <ClCompile Include="CSFFT\fft_512x512_c2c.cpp">
-      <Filter>CSFFT</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\DXUT\Optional\DXUTcamera.cpp">
       <Filter>DXUTOptional</Filter>
@@ -113,6 +106,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="d3dUtil.cpp" />
     <ClCompile Include="rain.cpp" />
+    <ClCompile Include="fft_512x512_c2c.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ocean_shading.hlsl" />

@@ -21,7 +21,7 @@ class ParticleEffect;
 	{
 		return a + RandF()*(b-a);
 	}*/
-	#define ReleaseCOM(x) { if(x){ x->Release(); x = 0; } }
+#define ReleaseCOM(x) { if(x){ x->Release(); x = 0; } }
 struct Particle
 	{
 		D3DXVECTOR3 InitialPos;

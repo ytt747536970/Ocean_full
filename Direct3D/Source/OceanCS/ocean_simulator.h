@@ -17,7 +17,7 @@
 
 #include <D3DX11.h>
 
-#include "CSFFT/fft_512x512.h"
+#include "fft_512x512.h"
 
 //#define CS_DEBUG_BUFFER
 #define PAD16(n) (((n)+15)/16*16)
@@ -66,6 +66,7 @@ public:
 	ID3D11RenderTargetView* getD3D11CurrStepMapRTV();
 protected:
 	OceanParameter m_param;
+	FFT fft;
 
 	// ---------------------------------- GPU shading asset -----------------------------------
 

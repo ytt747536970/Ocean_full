@@ -321,7 +321,9 @@ OceanSimulator::OceanSimulator(OceanParameter& params, ID3D11Device* pd3dDevice)
 	assert(m_pPerFrameCB);
 
 	// FFT
-	fft512x512_create_plan(&m_fft_plan, m_pd3dDevice, 3);
+	fft.init(pd3dDevice);
+	fft.fft512x512_create_plan(&m_fft_plan, 3);
+	//FFT.fft512x512_create_plan(&m_fft_plan, 3);
 
 #ifdef CS_DEBUG_BUFFER
 	D3D11_BUFFER_DESC buf_desc;
@@ -339,7 +341,7 @@ OceanSimulator::OceanSimulator(OceanParameter& params, ID3D11Device* pd3dDevice)
 
 OceanSimulator::~OceanSimulator()
 {
-	fft512x512_destroy_plan(&m_fft_plan);
+	fft.fft512x512_destroy_plan(&m_fft_plan);
 
 	SAFE_RELEASE(m_pBuffer_Float2_H0);
 	SAFE_RELEASE(m_pBuffer_Float_Omega);
@@ -431,6 +433,7 @@ void OceanSimulator::initHeightMap(OceanParameter& params, D3DXVECTOR2* out_h0, 
 			out_omega[i * (height_map_dim + 4) + j] = sqrtf(GRAV_ACCEL * sqrtf(K.x * K.x + K.y * K.y));
 		}
 	}
+	
 }
 
 void OceanSimulator::updateDisplacementMap(float time)
@@ -476,7 +479,7 @@ void OceanSimulator::updateDisplacementMap(float time)
 
 
 	// ------------------------------------ Perform FFT -------------------------------------------
-	fft_512x512_c2c(&m_fft_plan, m_pUAV_Dxyz, m_pSRV_Dxyz, m_pSRV_Ht);
+	fft.fft_512x512_c2c(&m_fft_plan, m_pUAV_Dxyz, m_pSRV_Dxyz, m_pSRV_Ht);
 
 	// --------------------------------- Wrap Dx, Dy and Dz ---------------------------------------
 	// Push RT

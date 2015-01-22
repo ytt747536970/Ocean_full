@@ -261,3 +261,40 @@ void fft512x512_destroy_plan(CSFFT512x512_Plan* plan)
 	for (int i = 0; i < 6; i++)
 		SAFE_RELEASE(plan->pRadix008A_CB[i]);
 }
+
+HRESULT buildFX(ID3D11Device* pd3dDevice,ID3DX11Effect*  g_pEffect)
+{
+	DWORD flag = 0;  
+	#if defined(DEBUG) || defined(_DEBUG)   
+    flag |= D3D10_SHADER_DEBUG;   
+    flag |= D3D10_SHADER_SKIP_OPTIMIZATION;   
+	#endif   
+	//两个ID3D10Blob用来存放编译好的shader及错误消息     
+	ID3D10Blob  *compiledShader(NULL);    
+	ID3D10Blob  *errMsg(NULL);    
+	//编译effect     
+	HRESULT hr = D3DX11CompileFromFile(L"fire.fx",0,0,0,"fx_5_0",flag,0,0,&compiledShader,&errMsg,0);    
+	//如果有编译错误，显示之     
+	if(errMsg)    
+	{    
+	   MessageBoxA(NULL,(char*)errMsg->GetBufferPointer(),"ShaderCompileError",MB_OK);    
+	  errMsg->Release();    
+	  return FALSE;    
+	}    
+	if(FAILED(hr))    
+	{    
+	  MessageBox(NULL,L"CompileShader错误!",L"错误",MB_OK);    
+	 return FALSE;    
+	}    
+  
+	hr = D3DX11CreateEffectFromMemory(compiledShader->GetBufferPointer(), compiledShader->GetBufferSize(),   
+	 0, pd3dDevice, &g_pEffect);  
+	if(FAILED(hr))  
+	{  
+	  MessageBox(NULL,L"CreateEffect错误!",L"错误",MB_OK);    
+	  return FALSE;    
+	}  
+ 
+}
+
+  
